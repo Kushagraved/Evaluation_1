@@ -45,7 +45,15 @@ const calculateScore=(input)=>{
     return sumFrames;
 }
 
+const bestScore=(input)=>{
+    let max_score=0;
+    input.forEach((game)=>{
+        const currGameScore=calculateScore(game);
+        max_score=max(max_score,currGameScore);
+    })
 
+    return max_score;
+}
 console.log(calculateScore([10,5,5,9,0]));
 console.log(calculateScore([3, 6, 3, 6, 3, 6, 3, 6, 3, 6, 3, 6, 3, 6, 3, 6, 3, 6, 3, 6]));
 console.log(calculateScore( [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2,3]));
