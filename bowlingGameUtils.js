@@ -1,17 +1,33 @@
 const calculateScore=(input)=>{
     let sumFrames=0;
+    let currFrame=0;
     for(let i=0;i<input.length;){
 
         let currFrameScore=0;
+        //Last Frame
+        if(currFrame===10){
+            if(input[i]===10){
+                currFrameScore+=10+(i+1<input.length ?input[i+1]: 0)+(i+2<input.length ?input[i+2]:0);
+            }
+            else if(input[i]+input[i+1]===10){
+                
+                currFrameScore+=10+(i+2<input.length ? input[i+2] :0);
+            }
+            else{
+                currFrameScore+=input[i];
+                currFrameScore+=(i+1<input.length ? input[i+1] :0);
+            }
+            break;
+        }
         //Strike
         if(input[i]===10){
-            currFrameScore+=10+input[i+1]+input[i+2];
+            currFrameScore+=10+(i+1<input.length ?input[i+1]: 0)+(i+2<input.length ?input[i+2]:0);
             i++;
         }
         else if(input[i]<10){
             currFrameScore+=input[i];
-            currFrameScore+=input[i+1];
-
+            currFrameScore+=(i+1<input.length ? input[i+1] :0);
+            //Spare
             if(currFrameScore===10){
                 currFrameScore+=input[i+2];
                 i=i+2;
@@ -21,13 +37,16 @@ const calculateScore=(input)=>{
                 i=i+2;
             }
         }
-        console.log(currFrameScore);
+
         sumFrames+=currFrameScore;
+        currFrame++;
     }
 
     return sumFrames;
 }
-// console.log(calculateScore([10,5,5,9,0]));
-// console.log(calculateScore([3, 6, 3, 6, 3, 6, 3, 6, 3, 6, 3, 6, 3, 6, 3, 6, 3, 6, 3, 6]));
-// console.log(calculateScore( [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 10, 10]));
-// console.log(calculateScore([6, 4, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]));
+
+
+console.log(calculateScore([10,5,5,9,0]));
+console.log(calculateScore([3, 6, 3, 6, 3, 6, 3, 6, 3, 6, 3, 6, 3, 6, 3, 6, 3, 6, 3, 6]));
+console.log(calculateScore( [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2,3]));
+console.log(calculateScore([6, 4, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]));
