@@ -1,4 +1,5 @@
-const {calculateScore,bestScore}=require('./bowlingGameUtils')
+const {calculateScore,bestScore}=require('./bowlingGameUtils');
+
 describe('Bowling Game Utilities',()=>{
     describe('Calculate score of particular game', () => {
         const testCases = [
